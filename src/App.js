@@ -1,5 +1,6 @@
 import './App.css';
 import {useState} from 'react';
+import { click } from '@testing-library/user-event/dist/click';
 
 function App() {
   
@@ -19,9 +20,47 @@ function App() {
     setOperacionActual(valor)
   }
 
-  // const resultado = () => {
-  //   setNumeroOne 
-  // }
+  const eliminarTodo =  () => {
+    setNumeroOne('')
+    setNumeroDos('')
+    setResultado(0)
+    setOperacionActual('')
+  }
+
+  const eliminarUno = () => {
+      if( operacionActual === ''){
+        setNumeroOne(numeroUno.toString().slice(0, -1));
+      }
+      else if(operacionActual != '')
+        setOperacionActual(operacionActual.toString().slice(0, -1));
+      
+      else{
+        setNumeroDos(numeroDos.toString().slice(0, -1));
+      }
+  }
+
+  const result = () => {
+    switch (operacionActual) {
+      case '+':
+        setResultado(parseInt(numeroUno) + parseInt(numeroDos));
+        break;
+
+      case '-':
+        setResultado(parseInt(numeroUno) - parseInt(numeroDos));
+      break;
+
+      case '/':
+        setResultado(parseInt(numeroUno) / parseInt(numeroDos));
+      break;
+
+      case '*':
+        setResultado(parseInt(numeroUno) * parseInt(numeroDos));
+        break;
+    
+      default:
+        break;
+    }
+  }
 
 
   return (
@@ -31,10 +70,10 @@ function App() {
         <div className='calculadora-grid'>
           <div className='output'>
             <div className='operacionAnterior'>{ numeroUno ? numeroUno + operacionActual + numeroDos : ''}</div>
-            <div className='operacionActual'></div>
+            <div className='operacionActual'>{resultado}</div>
           </div>
-          <button onClick={()=> {}} className='span'>AC</button>
-          <button onClick={()=> {}}>DEL</button>
+          <button onClick={eliminarTodo} className='span'>AC</button>
+          <button onClick={()=> eliminarUno()}>DEL</button>
           <button onClick={() => operation('/')}>/</button>
           <button onClick={()=> clickNumber(7)}>7</button>
           <button onClick={()=> clickNumber(8)}>8</button>
@@ -48,9 +87,9 @@ function App() {
           <button onClick={()=> clickNumber(2)}>2</button>
           <button onClick={()=> clickNumber(3)}>3</button>
           <button onClick={() => operation('-')}>-</button>
-          <button onClick={()=>{}}>.</button>
+          <button onClick={()=>{clickNumber('.')}}>.</button>
           <button onClick={()=> clickNumber(0)}>0</button>
-          <button onClick={()=>{}} className='span'>=</button>
+          <button onClick={result} className='span'>=</button>
         </div>
     </div>
     </>

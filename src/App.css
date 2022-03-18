@@ -30,7 +30,7 @@ h2{
 
 .calculadora-grid{
   display: grid;
-  min-height: 80vh;
+  min-height: 470px;
   grid-template-columns: repeat(4, 80px);
   grid-template-rows: repeat(5, 80px);
 }
