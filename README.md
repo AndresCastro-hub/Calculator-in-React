@@ -1,4 +1,4 @@
-# Calculadora en react
+# Calculator in react
 
 Proyecto para reforzar las bases de react.
 
